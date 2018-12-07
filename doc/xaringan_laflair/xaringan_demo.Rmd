@@ -1,0 +1,70 @@
+---
+title: 'The TMLE-Corpus project: Academic language in technology-mediated contexts'
+subtitle: 'AACL 2018'
+author: 'Kristopher Kyle, Geoffrey T. LaFlair, Nicole Ziegler'
+output:
+  xaringan::moon_reader:
+    css: ["uhm.css", "uhm-fonts.css"]
+    lib_dir: libs
+    self_contained: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: ["sizing.js", "interlinear.js"]
+      ratio: "16:9"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, error = FALSE, message = FALSE)
+options(htmltools.dir.version = FALSE, knitr.kable.NA = '')
+
+library(tidyverse)
+library(magrittr)
+# library(widgetframe)
+library(kableExtra)
+library(RefManageR)
+
+BibOptions(check.entries = FALSE, 
+           bib.style = "authoryear", 
+           cite.style = 'authoryear',
+           first.inits = TRUE,
+           style = "markdown",
+           hyperlink = FALSE, 
+           dashed = FALSE)
+myBib <- ReadBib("aacl.bib", check = FALSE)
+
+here::here('R/demo.R') %>%
+   knitr::read_chunk(.)
+
+
+
+```
+
+```{r, include=FALSE}
+<<loadps>>
+
+<<readdata>>
+```
+
+# Two columns
+
+.pull-left[
+```{r, fig.height=6}
+<<boxplots>>
+
+  box
+
+```
+]
+
+.pull-right[
+
+```{r, results='asis'}
+<<tables>>
+
+knitr::kable(toth_pre)
+```
+]
+
+---

@@ -1,0 +1,623 @@
+/*
+CSS for xaringan slides in UHM flavor
+Author: Geoffrey T. LaFlair (adapted from Joseph V. Casillas' ru_xaringan)
+Updated: 04/11/2018
+*/
+
+/* Package defaults that we slightly tweak */
+
+a, a > code {
+  color: #024731;
+  text-decoration: none;
+  font-family: 'Ubuntu', monospace;
+}
+
+/* slightly lower and bigger than default */
+.footnote {
+  position: absolute;
+  bottom: 1em;
+  padding-right: 4em;
+  font-size: 95%;
+}
+
+/* important code slightly red */
+.remark-code-line-highlighted {
+  background-color: #99B5AC !important;
+}
+
+/* color tweak */
+.inverse {
+  background-color: #024731;
+  color: #ffffff;
+  font-size: 24pt;
+}
+
+/* slightly spacing change */
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #f3f3f3;
+  line-height: 1.0em;
+}
+
+/* Two-column layout (slightly wider for aspect ration) */
+.left-column {
+  color: #777;
+  width: 25%;
+  height: 92%;
+  float: left;
+}
+
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #000;
+}
+
+/* slightly thiner to suppor aspect ration */
+.right-column {
+  width: 70%;
+  float: right;
+  padding-top: 1em;
+}
+
+.pull-left {
+  float: left;
+  width: 48%;
+}
+
+.pull-right {
+  float: right;
+  width: 48%;
+}
+
+.pull-right ~ * {
+  clear: both;
+}
+
+.left-small-left {
+  float: left;
+  width: 36%;
+}
+
+.left-small-right {
+  float: left;
+  width: 62%;
+}
+
+.align-right {
+  padding-left: 750px;
+}
+
+img, video, iframe {
+  max-width: 100%;
+}
+
+blockquote {
+  border-left: solid 5px lightgray;
+  padding-left: 1em;
+  font-size: 24pt;
+}
+
+/* adjust table horizontal spacing */
+th, td {
+  padding:0 15px 0 15px;
+}
+
+
+table {
+   border: 1px solid #FFFFFF;
+   border-collapse: collapse;
+   width: 95%;
+   vertical-align: middle;
+   padding: 5px;
+   margin-left: auto;
+   margin-right: auto;
+
+}
+
+td {
+   border: 1px solid #FFFFFF;
+   vertical-align: middle;
+   padding: 5px;
+
+}
+
+th {
+   background-color: #024731;
+   color: white;
+   border: 1px solid #FFFFFF;
+   vertical-align: middle;
+   padding: 5px;
+
+}
+
+.normal_table table tr:nth-child(odd) {
+  background-color: #e6e6e6;
+  color: #000000;
+  /*font-size: 18px;*/
+}
+
+.large_table table tr {
+  /*background-color: #e6e6e6;*/
+  color: #000000;
+  font-size: 15px;
+}
+
+.no_border table tr td{
+  border-bottom: none;
+  border-collapse: collapse;
+}
+
+/*.large_table_e table tr:nth-child(even) {
+  color: #000000;
+  font-size: 15px;
+}*/
+
+/*tr:nth-child(even){
+    color: #000000;
+    font-size: 18px;
+}*/
+
+
+.special_table table tr:nth-child(6n+1){
+  background-color: #e6e6e6;
+  color: #000000;
+}
+
+.study_group table tr{
+  background-color: #440154ff;
+  color: #000000;
+  opacity: .40;
+}
+
+/* remove color from tables */
+/*table {
+  margin: auto;
+  border-top: none;
+  border-bottom: none;
+}*/
+
+
+table thead th { border-bottom: none; }
+/*thead, tfoot, tr:nth-child(even) { background: none; }*/
+
+/* leave this alone */
+@page { margin: 0; }
+@media print {
+  .remark-slide-scaler {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
+
+
+/*~~~~~~~~~~~~~~~*/
+/* UHM additions */
+/*~~~~~~~~~~~~~~~*/
+
+/* Title slide */
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+/* Add image and change bg color */
+.title-slide {
+  background-image: url(Manoa_seal.svg);
+  /*background-image: url(left.svg);*/
+  background-position: 50% 90%;
+  background-size: 175px;
+  background-color: #fff;
+ /* padding-left: 100px; */ /* delete this for 4:3 aspect ratio */
+}
+
+/* H1 fonts */
+.title-slide h1 {
+  color: #024731;
+  padding-top: 5px;
+  font-weight: bold;
+  font-size: 45px;
+  line-height: 58px;
+  /*line-height: 0.05;*/
+  text-align: center;
+  text-shadow: none;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  margin-top: -95px;
+}
+
+/* H2 fonts */
+.title-slide h2 {
+  color: #797979;
+  font-size: 32px;
+  text-align: center;
+  text-shadow: none;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+/* H3 fonts */
+.title-slide h3 {
+  font-size: 28px;
+  font-weight: normal;
+  color: #666666;
+  text-align: center;
+  text-shadow: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 1;
+}
+
+
+/* body slides */
+
+.center {
+  text-align: center;
+}
+
+body, p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24pt;
+}
+
+
+.listpad ul li { padding: 10px 20px; }
+
+ul, li, ol {
+  padding: 1px;
+  padding-left: 25px;
+  margin-left: 10px;
+  font-size: 24pt;
+
+}
+
+.normal_font{ font-size: 24pt;}
+
+.smallpad ul, li, ol {
+  padding: 2;
+}
+
+.countTable table tr td:first-child + td {
+  font-family: 'Varela Round', sans-serif;
+  background: #d0b36c;
+}
+
+.tableFont table tr td {
+  font-weight: bolder;
+  font-size: 18px;
+  color: #515151;
+  /*color: #000000;*/
+}
+
+.tableFont2 table tr td {
+  font-weight: bolder;
+  font-size: 15px;
+  /*color: #515151;*/
+  /*color: #000000;*/
+}
+
+.newPadding table tr td {
+  padding: .5em;
+  border-spacing: 1px;
+}
+
+.emphasized {
+   font-size: 2em;
+}
+
+/* Remove slide count */
+.title-slide .remark-slide-number {
+  text-shadow: none;
+}
+
+/*~~~~~~~~~~~~~~~~~~*/
+/* SECTION DIVIDERS */
+/*~~~~~~~~~~~~~~~~~~*/
+
+/* section divider red */
+.title-slide-section-green {
+  background-color: #024731;
+  padding-left: 100px;  /* delete this for 4:3 aspect ratio */
+}
+
+/* section divider red H1 fonts */
+.title-slide-section-green h1, .title-slide-section-green h2, .title-slide-section-green h3, .title-slide-section-green p {
+  color: #fff;
+}
+
+/* section divider grey */
+.title-slide-section-grey {
+  background-color: #515151;
+  padding-left: 100px;  /* delete this for 4:3 aspect ratio */
+}
+
+/* section divider grey H1 fonts */
+.title-slide-section-grey h1, .title-slide-section-grey h2, .title-slide-section-grey h3 {
+  color: #fff;
+}
+
+.title-slide-section-grey p {
+  color: #fff;
+}
+
+/*~~~~~~~~~~~~~~~~~~*/
+/* FINAL SLIDE      */
+/*~~~~~~~~~~~~~~~~~~*/
+
+.title-slide-final {
+  background-color: #FFFFFF;
+  padding-left: 100px;
+  text-align: center;
+}
+
+.title-slide-final h1 {
+  color: #024731;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~*/
+/* Global adjustments */
+/*~~~~~~~~~~~~~~~~~~~~*/
+
+/* Add padding to all slides for 16:9 aspect ratio */
+.remark-slide-content {
+  padding-left: 100px;  /* delete this for 4:3 aspect ratio */
+}
+
+.remark-notes-preview {
+    font-size:12pt;
+}
+
+.remark-notes {
+  font-size: 12pt;
+}
+
+.remark-notes ul {
+  font-size: 12pt;
+}
+
+.remark-notes ol {
+  font-size: 12pt;
+}
+
+.remark-notes li {
+  font-size: 12pt;
+}
+
+.remark-notes-preview ul {
+  font-size: 12pt;
+}
+
+.remark-notes-preview ol {
+  font-size: 12pt;
+}
+
+.remark-notes-preview li {
+  font-size: 12pt;
+}
+
+
+
+/* Color adjustments for text */
+
+/* Make bold syntax compile to RU-red */
+strong {
+  color: #024731;
+}
+
+.uhmgreen {
+  color: #024731;
+}
+
+/* Add blue tag */
+.blue {
+  color: #0000CC;
+  font-weight: bold;
+}
+
+/* Add grey tag */
+.grey {
+  color: #515151;
+}
+
+.lightgrey {
+  color: #818181;
+}
+
+/* Force black */
+.black {
+  color: black;
+  font-weight: bold;
+}
+
+/* Add white tag */
+.white {
+  color: white;
+}
+
+.ua-red{
+  color: #cc0033;
+}
+
+.nau-gold{
+  /*color: #ffd200;*/
+  background-color: #ffd200;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.v-noun{
+  color: #440154ff;
+  font-weight: bolder;
+  /*font-size: 1.25em;*/
+}
+
+.v-mid{
+  color: #21908dff;
+  font-weight: bolder;
+
+}
+
+.v-ladv{
+  color: #fde725ff;
+  font-weight: bolder;
+}
+
+.v-mverb{
+  color: #e2e333ff;
+  font-weight: bolder;
+  /*font-size: 1.25em;*/
+}
+
+.v-hedge{
+  color: #d8e137ff;
+  font-weight: bolder;
+}
+
+.v-emph{
+  color: #95d54bff;
+  font-weight: bolder;
+}
+
+.v-cadv{
+  color: #71cb5aff;
+  font-weight: bolder;
+}
+
+
+.v-three{
+  color: #440154ff;
+  font-weight: bolder;
+}
+
+.v-three-minus{
+  color: #461969ff;
+  font-weight: bolder;
+}
+
+.v-two-plus{
+  color: #46307cff;
+  font-weight: bolder;
+}
+
+.v-study-grps{
+  color: #3f4686ff;
+  font-weight: bolder;
+}
+
+.v-two{
+  color: #375a8cff;
+  font-weight: bolder;
+}
+
+.v-conv{
+  color: #2e6c8eff;
+  font-weight: bolder;
+}
+
+.v-cust{
+  color: #287d8eff;
+  font-weight: bolder;
+}
+
+.v-three-plus{
+  color: #21908dff;
+  font-weight: bolder;
+}
+
+.v-serv{
+  color: #24a086ff;
+  font-weight: bolder;
+}
+
+.v-nurse{
+  color: #2cb07eff;
+  font-weight: bolder;
+}
+
+.v-prof{
+  color: #4cc06cff;
+  font-weight: bolder;
+}
+
+.v-four-minus{
+  color: #72ce55ff;
+  font-weight: bolder;
+}
+
+.v-four{
+  color: #9ed93aff;
+  font-weight: bolder;
+}
+
+.v-patient{
+  color: #cbe02dff;
+  font-weight: bolder;
+}
+
+.v-stud{
+  color: #fde725ff;
+  font-weight: bolder;
+}
+
+.grey{
+  color: #b9b9b9;
+}
+
+/* Color adjustments to headers */
+h1 {
+  color: #024731;
+}
+
+h3 {
+  color: #515151;
+}
+
+.center_image img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+/* Font size tags */
+.big {
+  font-size: 1.25em;
+}
+
+.bigger{
+  font-size: 2em;
+}
+
+.large {
+  font-size: 3em
+}
+
+.smaller body, p {
+  font-size: 60%;
+  display: block;
+}
+
+.small body, p {
+  font-size: 85%;
+  display: block;
+}
+
+.smalll body, p {
+  font-size: 80%;
+  display: block;
+}
+
+/* ru blockquote */
+.uh-blockquote {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 40px;
+  margin-right: 40px;
+  border-left: solid 10px #024731;
+  background-color: #818181;
+  padding: 1em;
+  color: #fff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
