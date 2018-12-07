@@ -1,6 +1,6 @@
 ---
 title: "The Typology of Causative-Applicative Syncretism"
-author: "Bradley McDonnell"
+author: "Bradley McDonnell and Christian Mortensen"
 date: "December 12, 2017 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
@@ -10,32 +10,91 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
+<style>
+p, ul, ol, li, code {
+  font-size: 20pt;
+}
+
+.glosstable table th {
+  border: 0px;
+  background-color: white;
+  font-weight: normal;
+}
+
+.gr {
+  font-variant: small-caps;
+}
+</style>
+
+
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 library(tidyverse)
 library(magrittr)
 library(forcats)
-library(leaflet)
-library(mapview)
-library(wesanderson)
+library(leaflet) # for creating maps
+# library(mapview) 
+library(wesanderson) # for custom colors
+library(knitr) # for tables
+library(kableExtra) # for tables
 
 ## Load datasets
+wals_200_caus_appl <- read_tsv("../data/wals_200_caus_appl.csv")
 wals_200_syncretism <- read_tsv("../data/wals_200_syncretism.csv")
-wals_200_causative <- read_tsv("../data/wals_200_applicative.csv")
-wals_200_applicative <- read_tsv("../data/wals_200_causative.csv")
 
 ## Define colors for maps
-pal <- colorFactor(palette = wes_palette(name = "Zissou1")[c(2,5)],  domain = levels(wals_200_syncretism$causative_111a))
-pal2 <- colorFactor(palette = wes_palette(name = "Zissou1")[c(5)],  domain = levels(wals_200_syncretism$reported))
+pal <- colorFactor(palette = wes_palette(name = "Zissou1")[c(2,5)],
+                   domain = levels(wals_200_syncretism$causative_111a)
+                   )
+pal2 <- colorFactor(palette = wes_palette(name = "Zissou1")[c(5)],
+                    domain = levels(wals_200_syncretism$reported)
+                    )
 ```
 
+```{r, load_refs, echo=FALSE, cache=FALSE}
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "authoryear", 
+           cite.style = 'alphabetic', 
+           style = "markdown",
+           hyperlink = FALSE, 
+           dashed = FALSE)
+causApplBib <- ReadBib("Causative-Applicative.bib", check = FALSE)
+```
+
+---
+# Goals
+
+1. An overview of causatives and applicatives in the world's languages.
+--
+
+1. Worldwide distribution of causative-applicative syncretism.
+--
+
+  * Distribution within a subset of the WALS 200 sample.
+--
+
+1. Challenges & prospects creating a typology of causative-applicative syncretism.
+
+---
+
+class: inverse, center, middle
+
+# Causatives
+
+---
+
+# WALS map for causatives 
 
 ```{r out.width='100%', fig.height=6, eval=require('leaflet'), echo=FALSE}
-leaflet(wals_200_causative) %>% 
+causative_map <- wals_200_caus_appl %>%
+  na.omit() %>%
+  leaflet() %>%
   fitBounds(lng1 = -170, lat1 = -50, lng2 = 170, lat2 = 70) %>%
   addTiles() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
+
   addCircleMarkers(~longitude, 
                    ~latitude, 
                    color = ~pal(causative_111a), 
@@ -52,25 +111,176 @@ leaflet(wals_200_causative) %>%
             title = "Causatives",
             opacity = 1
   )
+causative_map
 ```
 
 ---
 
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+# Causatives 
 
-???
+```{r, echo=FALSE}
+wals_200_caus_appl %>%
+  na.omit() %>%
+  group_by(causative_111a) %>%
+  summarize(n=n()) %>%
+  mutate(rel.freq = paste0(round(100 * n/sum(n), 0), "%")) %>%
+  kable(format = 'html', 
+        col.names = c("Causatives",
+                      "Total (n)",
+                      "Total (%)")
+        )  %>%
+  kable_styling()
+```
+---
 
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
+class: inverse, center, middle
+
+# Applicatives
+
 
 ---
-class: center, middle
 
-# xaringan
+# WALS map for applicatives
 
-### /ʃæ.'riŋ.ɡæn/
+```{r, 'appl-map', out.width='100%', fig.height=6, eval=require('leaflet'), echo=FALSE}
+applicative_map <- wals_200_caus_appl %>%
+  na.omit() %>%
+  leaflet() %>% 
+  fitBounds(lng1 = -170, lat1 = -50, lng2 = 170, lat2 = 70) %>%
+  addTiles() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircleMarkers(~longitude, 
+                   ~latitude, 
+                   color = ~pal(applicative_109a), 
+                   weight = 1, 
+                   fillColor = ~pal2(applicative_109a),
+                   fillOpacity = 0.75,
+                   opacity = 1,
+                   radius = 3, 
+                   label=~as.character(name)
+  ) %>%
+  addLegend("topright", 
+            pal = pal, 
+            values = ~applicative_109a,
+            title = "Applicatives",
+            opacity = 1
+  )
+applicative_map
+```
+
+---
+
+# Applicatives 
+
+```{r, echo=FALSE}
+wals_200_caus_appl %>%
+  na.omit() %>%
+  group_by(applicative_109a) %>%
+  summarize(n=n()) %>%
+  mutate(rel.freq = paste0(round(100 * n/sum(n), 0), "%")) %>%
+  kable(format = 'html',
+        col.names = c("Applicatives",
+                      "Total (n)",
+                      "Total (%)")
+        )  %>%
+  kable_styling()
+```
+
+---
+
+# Causative & Applicatives 
+
+
+
+```{r, echo=FALSE}
+wals_200_caus_appl %>%
+  na.omit() %>%
+  group_by(causative_111a, applicative_109a) %>%
+  summarize(n=n()) %>%
+  kable(format = 'html', 
+        col.names = c("Causatives", 
+                      "Applicatives", 
+                      "Total (n)")
+        )  %>%
+  kable_styling()
+```
+
+---
+# Causative-applicative syncretism map
+```{r, 'sync-map', out.width='100%', fig.height=6, eval=require('leaflet'), echo=FALSE}
+syncretism_map <- leaflet(wals_200_syncretism) %>%
+  fitBounds(lng1 = -170, lat1 = -50, lng2 = 170, lat2 = 70) %>%
+  addTiles() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircleMarkers(~longitude, 
+                   ~latitude, 
+                   color = ~pal(syncretism), 
+                   weight = 1, 
+                   radius = 4, 
+                   fillColor = ~pal(syncretism), 
+                   fillOpacity = 0.75,
+                   opacity = 1,
+                   label=~as.character(name)
+                   ) %>%
+  addLegend("topright", 
+            pal = pal, 
+            values = ~syncretism,
+            title = "Syncretism",
+            opacity = 1
+  )
+syncretism_map
+```
+
+---
+
+# Causative-applicative syncretism
+
+```{r, echo=FALSE}
+caus_appl_table <- wals_200_caus_appl %>% 
+  na.omit() %>%
+  group_by(causative_111a, applicative_109a) %>% 
+  tally() %>%
+  rename(causative = `causative_111a`, applicative = `applicative_109a`, languages = n) %>%
+  ungroup %>%
+  as.data.frame()
+
+caus_appl_neither <- caus_appl_table %>% 
+  filter(causative=="no" & applicative=="no")
+caus_appl_both <- caus_appl_table %>% 
+  filter(causative=="yes" & applicative=="yes")
+caus_appl_either <- caus_appl_table %>% 
+  filter(causative=="yes" & applicative=="no" | causative=="no" & applicative=="yes")
+```
+
+
+Remember `r caus_appl_neither[3]` languages that have both causative and applicatives 
+
+```{r, echo=FALSE}
+wals_200_syncretism %>%
+  group_by(syncretism) %>%
+  summarize(n=n()) %>%
+  mutate(rel.freq = paste0(round(100 * n/sum(n), 0), "%")) %>%
+  kable(format = 'html', 
+        col.names = c("Syncretism", 
+                      "Total (n)",
+                      "Total (%)")
+        )  %>%
+  kable_styling()
+```
+
+---
+
+# References
+
+```{r, 'refs', results='asis', echo=FALSE}
+NoCite(causApplBib, "*")
+PrintBibliography(causApplBib, start = 1, end = 2)
+```
 
 ---
 class: inverse, center, middle
+
 
 # Get Started
 
