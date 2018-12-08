@@ -15,3 +15,6 @@ In this session, participants will be introduced to reproducible HTML presentati
 
 ## Packages
 Install the following R packages  `install.packages(c('knitr', 'haven', 'leaflet', 'kableExtra', 'tidyverse', 'wesanderson'))` and the slide package from GitHub `devtools::install_github('yihue/xaringan')` *before* compiling any of the presentations in RStudio.
+
+## RMarkdown
+See this [cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) for RMarkdown basics.

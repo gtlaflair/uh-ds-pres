@@ -84,7 +84,7 @@ class: inverse, center, middle
 
 ---
 
-# WALS map for causatives 
+# WALS map for causatives `r Citep(causApplBib, "song2013nonperiphrastic")`
 
 ```{r out.width='100%', fig.height=6, eval=require('leaflet'), echo=FALSE}
 causative_map <- wals_200_caus_appl %>%
@@ -190,23 +190,53 @@ wals_200_caus_appl %>%
 
 # Causative & Applicatives 
 
-
-
 ```{r, echo=FALSE}
-wals_200_caus_appl %>%
+caus_appl_table <- wals_200_caus_appl %>%
   na.omit() %>%
   group_by(causative_111a, applicative_109a) %>%
-  summarize(n=n()) %>%
+  summarize(n=n()) 
+
+caus_appl_table %>%
   kable(format = 'html', 
         col.names = c("Causatives", 
                       "Applicatives", 
                       "Total (n)")
         )  %>%
   kable_styling()
+
+caus_appl_table_df <- caus_appl_table %>%
+  ungroup %>%
+  as.data.frame()
 ```
 
 ---
+
+# Causative & Applicatives
+
+* Most langauges have a **causative** but *no* **applicative**
+  * (n = `r caus_appl_table_df[3,3]`)
+
+--
+* Many languages have a **causative** *and* an **applicative** 
+  * (n = `r caus_appl_table_df[4,3]`)
+
+--
+* A small number of langauges have *neither* a **causative** *nor* an **applicative**
+  * (n = `r caus_appl_table_df[1,3]`)
+
+--
+* Very *few* langauges have an **applicative** but *no* **causative** 
+  * (n = `r caus_appl_table_df[2,3]`)
+
+---
+
+class: inverse, center, middle
+
+# Causative-applicative syncretism
+
+---
 # Causative-applicative syncretism map
+
 ```{r, 'sync-map', out.width='100%', fig.height=6, eval=require('leaflet'), echo=FALSE}
 syncretism_map <- leaflet(wals_200_syncretism) %>%
   fitBounds(lng1 = -170, lat1 = -50, lng2 = 170, lat2 = 70) %>%
@@ -232,28 +262,7 @@ syncretism_map
 ```
 
 ---
-
 # Causative-applicative syncretism
-
-```{r, echo=FALSE}
-caus_appl_table <- wals_200_caus_appl %>% 
-  na.omit() %>%
-  group_by(causative_111a, applicative_109a) %>% 
-  tally() %>%
-  rename(causative = `causative_111a`, applicative = `applicative_109a`, languages = n) %>%
-  ungroup %>%
-  as.data.frame()
-
-caus_appl_neither <- caus_appl_table %>% 
-  filter(causative=="no" & applicative=="no")
-caus_appl_both <- caus_appl_table %>% 
-  filter(causative=="yes" & applicative=="yes")
-caus_appl_either <- caus_appl_table %>% 
-  filter(causative=="yes" & applicative=="no" | causative=="no" & applicative=="yes")
-```
-
-
-Remember `r caus_appl_neither[3]` languages that have both causative and applicatives 
 
 ```{r, echo=FALSE}
 wals_200_syncretism %>%
